@@ -1,50 +1,40 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Square from "./Square";
 import "./Board.css";
 
-export default class Board extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      squares: Array(9).fill(null),
-    };
-  }
+const Board = () => {
+  const [squares, setSquares] = useState(Array(9).fill(null));
 
-  handleClick(i) {
-    const squares = this.state.squares.slice();
-    squares[i] = "X";
-    this.setState({ squares: squares });
-  }
+  const handleClick = (i) => {
+    const newSquares = squares.slice();
+    newSquares[i] = "X";
+    setSquares(newSquares);
+  };
 
-  renerSquare(i) {
-    return (
-      <Square
-        value={this.state.squares[i]}
-        onClick={() => this.handleClick(i)}
-      />
-    );
-  }
+  const renerSquare = (i) => {
+    return <Square value={squares[i]} onClick={() => handleClick(i)} />;
+  };
 
-  render() {
-    return (
-      <div>
-        <div className="status">Next Player: X, O</div>
-        <div className="border-row">
-          {this.renerSquare(0)}
-          {this.renerSquare(1)}
-          {this.renerSquare(2)}
-        </div>
-        <div className="border-row">
-          {this.renerSquare(3)}
-          {this.renerSquare(4)}
-          {this.renerSquare(5)}
-        </div>
-        <div className="border-row">
-          {this.renerSquare(6)}
-          {this.renerSquare(7)}
-          {this.renerSquare(8)}
-        </div>
+  return (
+    <div>
+      <div className="status">Next Player: X, O</div>
+      <div className="border-row">
+        {renerSquare(0)}
+        {renerSquare(1)}
+        {renerSquare(2)}
       </div>
-    );
-  }
-}
+      <div className="border-row">
+        {renerSquare(3)}
+        {renerSquare(4)}
+        {renerSquare(5)}
+      </div>
+      <div className="border-row">
+        {renerSquare(6)}
+        {renerSquare(7)}
+        {renerSquare(8)}
+      </div>
+    </div>
+  );
+};
+
+export default Board;
