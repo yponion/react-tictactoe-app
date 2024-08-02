@@ -2,22 +2,13 @@ import React, { useState } from "react";
 import Square from "./Square";
 import "./Board.css";
 
-const Board = () => {
-  const [squares, setSquares] = useState(Array(9).fill(null));
-
-  const handleClick = (i) => {
-    const newSquares = squares.slice();
-    newSquares[i] = "X";
-    setSquares(newSquares);
-  };
-
+const Board = ({ squares, onClick }) => {
   const renerSquare = (i) => {
-    return <Square value={squares[i]} onClick={() => handleClick(i)} />;
+    return <Square value={squares[i]} onClick={() => onClick(i)} />;
   };
 
   return (
-    <div>
-      <div className="status">Next Player: X, O</div>
+    <div className="board-wrapper">
       <div className="border-row">
         {renerSquare(0)}
         {renerSquare(1)}
@@ -36,5 +27,4 @@ const Board = () => {
     </div>
   );
 };
-
 export default Board;
